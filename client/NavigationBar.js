@@ -9,7 +9,7 @@ class NavigationBar extends React.Component {
     return(
       <div>
         <nav>
-          <div className="nav-wrapper">
+          <div className="nav-wrapper black">
               <a href="/" className="brand-logo center">G7</a>
                 <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
