@@ -1,5 +1,6 @@
 import React from 'react';
 import NavigationBar from '../NavigationBar';
+import axios from 'axios';
 
 class Register extends React.Component{
   constructor(){
@@ -20,12 +21,26 @@ class Register extends React.Component{
     const totalStylePanel = {
       padding: "10px"
     };
+
     this.state={
       registerButtons,
       totalStyleRow,
-      totalStylePanel
+      totalStylePanel,
+      products: []
     };
   }
+
+  componentDidMount() {
+    var self = this;
+    axios.get('/api/products')
+    .then(function (response){
+      console.log(response);
+      self.setState({products: response.data});
+    }).catch(function (error){
+      console.log(error);
+    });
+  }
+
   render(){
     return(
       <div>
@@ -36,6 +51,11 @@ class Register extends React.Component{
               <div className="card-panel black">
                 <span className="white-text">
                     <h5 className="center">Products</h5>
+                    {this.state.products.map((pt, index2)=>(
+                      <div key={index2} className="col m4">
+                        <a className="waves-effect blue btn">{pt.productName}<br/></a>
+                      </div>
+                    ))}
                 </span>
               </div>
             </div>
