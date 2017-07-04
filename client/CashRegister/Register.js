@@ -15,27 +15,23 @@ class Register extends React.Component{
       name: "Update",
       icon: "refresh"
     }];
-    const totalStyleRow = {
-      margin: "0px"
-    };
+
     const totalStylePanel = {
       padding: "10px"
     };
 
     this.state={
       registerButtons,
-      totalStyleRow,
       totalStylePanel,
-      products: []
+      categories: []
     };
   }
-
   componentDidMount() {
     var self = this;
-    axios.get('/api/products')
+    axios.get('/api/categories')
     .then(function (response){
       console.log(response);
-      self.setState({products: response.data});
+      self.setState({categories: response.data});
     }).catch(function (error){
       console.log(error);
     });
@@ -51,9 +47,9 @@ class Register extends React.Component{
               <div className="card-panel black">
                 <span className="white-text">
                     <h5 className="center">Products</h5>
-                    {this.state.products.map((pt, index2)=>(
+                    {this.state.categories.map((pt, index2)=>(
                       <div key={index2} className="col m4">
-                        <a className="waves-effect blue btn">{pt.productName}<br/></a>
+                        <a className="waves-effect blue btn-large">{pt.categoryName}</a>
                       </div>
                     ))}
                 </span>
@@ -73,7 +69,7 @@ class Register extends React.Component{
                 <div className="col m12" id="totalArea">
                   <div className="card-panel black" style={this.state.totalStylePanel}>
                     <span className="white-text">
-                      <div className="row" style={this.state.totalStyleRow}>
+                      <div className="row noMarginRow">
                       <div className="col m4">
                         <p>Total</p>
                       </div>
@@ -89,7 +85,7 @@ class Register extends React.Component{
                 <div className="col m12" id="registerButtonsArea">
                   {this.state.registerButtons.map((rb, index) => (
                     <div key={index} className="col m4">
-                      <a className="waves-effect black btn"><i className="material-icons left">{rb.icon}</i>{rb.name}<br/></a>
+                      <a className="waves-effect black btn-large"><i className="material-icons left">{rb.icon}</i>{rb.name}<br/></a>
                     </div>
                   ))}
                 </div>
